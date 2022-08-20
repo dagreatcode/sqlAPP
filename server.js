@@ -1,6 +1,6 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
-// const mysql = require("mysql");
+const connection = require("./config/connection");
 
 const app = express();
 
@@ -16,14 +16,11 @@ app.set("view engine", "handlebars");
 
 // VIEW ROUTES //
 app.get("/", (req, res) => {
-  res.render("index");
+  connection.query("SELECT * FROM user", (err, data) => {
+    console.table(data);
+  });
+  res.render("index", { name: "Vincent Kendrick" });
 });
-// app.get("/home", (req, res) => {
-//   res.render("home");
-// });
-// app.get("/about-us", (req, res) => {
-//     res.render("about-us");
-//   });
 
 // API ROUTES
 app.get("/api/config", (req, res) => {
