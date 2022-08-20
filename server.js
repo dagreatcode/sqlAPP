@@ -6,14 +6,15 @@ const app = express();
 
 const PORT = process.env.PORT || 8080;
 
-// MIDDLEWEAR
+// MIDDLEWEAR //
+// Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json);
+app.use(express.json());
 
 app.engine("handlebars", exphbs.engine({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-// VIEW ROUTES
+// VIEW ROUTES //
 app.get("/", (req, res) => {
   res.render("index");
 });
